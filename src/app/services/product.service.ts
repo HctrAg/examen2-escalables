@@ -26,6 +26,10 @@ export class ProductService {
     });
   }
 
+  public getProductById(id: number): Product | undefined {
+    return this._products.find(product => product.id === id);
+  }
+
   public get products(){
     return this._products;
   }

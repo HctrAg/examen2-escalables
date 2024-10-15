@@ -1,6 +1,9 @@
 import { NgFor } from '@angular/common';
 import { Product } from './../../interface/product.interface';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+
 
 @Component({
   selector: 'app-card-product',
@@ -11,18 +14,14 @@ import { Component, Input } from '@angular/core';
 })
 export class CardProductComponent {
 
+
   @Input()
-  public product: Product = {
-    id: 0,
-    title: "",
-    price: 0,
-    description: "",
-    category: "",
-    image: "",
-    rating: {
-      rate: 0,
-      count: 0
-    }
-  };
+  public product!: Product;
+
+  constructor(private router: Router) {}
+
+  viewDetails(): void {
+    this.router.navigate([`/product`, this.product.id]);  // Navega al detalle del producto usando su ID.
+  }
   
 }
